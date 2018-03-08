@@ -1,1 +1,2 @@
 # BigFive-Personality-MachineLearning
+The Big Five framework consists of five psychological features, namely openness, conscientiousness, extroversion, agreeableness and neuroticism. In this work daily routines of an individual are extracted using the Smartphone sensor data and Machine Learning models based on Neural Networks, Random Forests and Support Vector Machine are applied to model the personality.
