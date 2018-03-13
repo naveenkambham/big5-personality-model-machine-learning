@@ -1,13 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="0a9b7189-3705-4c61-826e-27415e74d50b" name="Default" comment="">
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UnitTests/test_BigFiveFeatureExtraction.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UnitTests/test_battery_sensor_features_extractor.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UnitTests/test_bluetooth_sensor_features_extractor.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UnitTests/test_screenstate_sensor_features_extractor.py" />
-      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/UnitTests/test_wifi_sensor_features_extractor.py" />
-    </list>
+    <list default="true" id="0a9b7189-3705-4c61-826e-27415e74d50b" name="Default" comment="" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="TRACKING_ENABLED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
