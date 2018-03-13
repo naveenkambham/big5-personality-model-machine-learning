@@ -1,10 +1,9 @@
 """
 Developer : Naveen Kambham
-Description:  Neural Networks Regression Model using Tensor Flow. This generalizes the data and then apply cross validation
-to evaluate it with RMSE as metric. Hyper parameters are tuned and set.
+Description:  Neural Networks Regression Model using Tensor Flow. This generalizes the data and cross validation is used
+to evaluate it with RMSE as metric. Hyper parameters are tuned using GridsearchCV and set.
 """
 #Importing the required libraries.
-
 import numpy
 import pandas
 from keras.models import Sequential
@@ -21,7 +20,7 @@ from sklearn.metrics import mean_squared_error
 
 
 
-#Enable the GPU and read data and fill null values
+#Enable the GPU, read data and fill null values
 os.environ["CUDA_DEVICE_ORDER"] = "PCI_BUS_ID"   # see issue #152
 os.environ["CUDA_VISIBLE_DEVICES"] = ""
 dataframe = pandas.read_csv(r'/home/naveen/Documents/DataSet1_1.csv')
@@ -30,8 +29,8 @@ dataframe = dataframe.fillna(value=0)
 
 def model():
     """
-    method to create the input,output layers and the output layers with relu activation and adam optimer and mse as loss function
-    :return:
+    method to create the input,output layers and the hidden layers with relu activation and adam optimer and mse as loss function
+    :return model:
     """
     model = Sequential()
     model.add(Dense(30, input_dim=13, kernel_initializer='normal', activation='relu'))
@@ -41,7 +40,9 @@ def model():
     return model
 
 def NeuralNets(trait):
-
+    """
+    code for Neural Networks model setup
+    """
     #get the dependent and independent variables
     X = dataframe.loc[:,'mediaUsage':'Scheduling_OfficeTools_Weather'].values
     Y = dataframe.loc[:,trait].values
