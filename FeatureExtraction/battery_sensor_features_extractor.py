@@ -3,34 +3,21 @@ Developer : Naveen Kambham
 Description:  Based on the Battery sensor Data, charger plug in time and duration of plug in time are extracted on a daily basis.
 """
 #Importing the required libraries.
-# Importing the required libraries.
 import collections as col
 import functools
 from collections import Counter
-
 import pandas as pd
-
 import FeatureExtraction.CommonFunctions.converters as converters
 from FeatureExtraction.CommonFunctions import dataprocessing_helper
-# Importing the required libraries.
-# Importing the required libraries.
-import collections as col
-import functools
-from collections import Counter
-
-import pandas as pd
-
-import FeatureExtraction.CommonFunctions.converters as converters
-from FeatureExtraction.CommonFunctions import dataprocessing_helper
-
 
 def TakeMostProbableTimeInStudy(study_values,day_values):
     """
-    Sometimes it is possible that partcipant can charge the mobile multipletimes in a day
-    In such caseswe consider the most probable time of corresponding participant
+    Method to get most probable time based on give data.
+    Sometimes it is possible that partcipant can charge the mobile multiple times in a day,
+    in such cases we consider the most probable time of corresponding participant
     occurred in the entire study period.
-    :param StudyValues:
-    :param DayValues:
+    :param StudyValues: study charge time values
+    :param DayValues: charge time values for a given day
     :return:
     """
 
@@ -66,13 +53,13 @@ def get_charger_plugintime_daily(file):
     df['Time'] =df['Time'].apply(converters.ConvertToInt)
 
 
-    #getting the all plug in times for a particular participant
+    #getting the all plug in times for a particular participant in the entire study of 30 days.
     tempdf = df
     tempgrouping = tempdf.groupby(['user_id'])
     batterychargeTimePerStudy= [(key,col.Counter(converters.ConvertToIntList(value['Time']))) for (key, value) in tempgrouping.__iter__()]
     batterychargeTimePerStudydf= pd.DataFrame(batterychargeTimePerStudy,columns=['ID','Values'])
 
-    #Group by Time and
+    #grouping by date and userid
     grouping = df.groupby(['user_id','Date'])
 
     #Get battery time for each day by taking the most probable time in the entire study if there are more than one recod
@@ -94,7 +81,7 @@ def max_battery_plugin_time_daily(file):
     df= pd.read_csv(file)
 
 
-    #create new df columns for start,end date and time columns and convert the values in to integer for math advantages
+    #create new df columns for start,end date and time columns and convert the values for math advantages
     df['StartDate'],df['StartTime'] = zip(*df['start_time'].map(lambda x:x.split(' ')))
     df['ConvertedStartTime'] = df['StartTime'].apply(converters.ConvertTime)
     df['ConvertedStartDate'] = df['StartDate'].apply(converters.ConvertDate)
@@ -107,7 +94,7 @@ def max_battery_plugin_time_daily(file):
     userIds= df.user_id.unique()
     outputlist=[]
 
-    # Since this depends on continous data records we need to iterate the records simple aggregation doesn't help much
+    # Since this depends on continous data records we need to iterate the records, smart aggregation doesn't help much
     #processing for corresponding participant
     for user in userIds:
         tempdf = df.loc[df.user_id == user]
@@ -130,6 +117,9 @@ def max_battery_plugin_time_daily(file):
     return output_dataFrame
 
 def extract(path):
+    """
+    Method to extract the features based on the csv path given
+    """
 
     #getting the daily charger plug in times in a day for each participants
     df_charge_plugin_times=get_charger_plugintime_daily(path)
