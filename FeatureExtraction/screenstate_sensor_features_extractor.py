@@ -1,7 +1,7 @@
 """
 Developer : Naveen Kambham
-Description: Code to find the datadaily(active) smartphone usage feature from Smartphone Screen State.
-Continuous screen ON and OFF statesin a single day are caliculated and
+Description: Code to find the daily(active) smartphone usage feature from Smartphone Screen Sensor data.
+Continuous screen ON and OFF states in a single day are caliculated and
 collectively these gave us the active mobile duration of each participant in a day.
 """
 
@@ -13,8 +13,8 @@ from FeatureExtraction.CommonFunctions import converters as converters
 def get_activephone_usage(file):
     """
     method to find the activie phone usage of participants
-    :param df:
-    :return:
+    :param file path:
+    :return dataframe:
     """
 
     #read the data in to dataframe
@@ -26,7 +26,7 @@ def get_activephone_usage(file):
     df['ConvertedTime'] = df['Time'].apply(converters.ConvertTime)
 
     #Loop through each user.
-    #Since this depends on continous data records we need to iterate the records simple aggregation doesn't help much
+    #Since this depends on continous data records we need to iterate the records aggregation doesn't help much
     userIds= df.user_id.unique()
     outputlist=[]
     for user in userIds:
@@ -65,6 +65,9 @@ def get_activephone_usage(file):
 
 
 def extract(path):
+    """
+    method to extract the features from smartphone sensor data
+    """
     return get_activephone_usage(path)
 
 
