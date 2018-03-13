@@ -14,13 +14,19 @@ import FeatureExtraction.wifi_sensor_features_extractor as wifi
 class DataSet(object):
 
     def __init__(self, path, balance=0.0):
-        """Return a Customer object whose name is *name* and starting
-        balance is *balance*."""
+        """Return object for Dataset"""
         self.path = path
 
     def extract_features(self):
+        """
+        method to extract the features from battery, bluetooth and wifi sensors
+        expects file name on the Dataset object.
+        """
 
         folder_Path = self.path
+        if folder_Path=="":
+            print("need to set the file name to create data set")
+            return
         ################ Battery Sensor #################
 
         print("Extracting Battery Sensor Features ------------------------5%")
@@ -52,14 +58,14 @@ class DataSet(object):
         df_wifi.to_csv(folder_Path+'wifi_processed.csv')
         print("Number of Features extracted from WiFi Sensor are:",len(df_wifi))
 
-        #Merging the features
+        #Merging the features on ID and Date
         print("Extracting Features Done, Merging the Features ------------------------90%")
         dfs = [df_battery,df_bluetooth,df_screen,df_wifi]
         merged_features= dataprocess.merge(dfs, ['ID', 'Date'])
 
         print("Feature Extraction Finished, total number of samples are:",len(merged_features))
 
-        print("Saving a copy")
+        print("Saving a copy at",folder_Path+'FeaturesExtraction.csv')
         merged_features.to_csv(folder_Path+'FeaturesExtraction.csv')
 
         return merged_features

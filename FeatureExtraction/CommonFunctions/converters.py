@@ -1,21 +1,18 @@
 """
 Developer : Naveen Kambham
-Description:  This file contains the basic data convertes
+Description:  This file contains the basic data convertes and methods are self explonatory
 """
-#Importing the required libraries.
 
-def ConvertTime(Time):
-    Times = Time.split(":")
+
+def ConvertTime(string):
+    Times = string.split(":")
     return int(Times[0])+((int)(Times[1])*(1/60))
 
 def ConvertToIntList(Values):
     return Values.get_values()
 
-def ConvertToInt(value):
-    return int(value)
-
-def ConvertDate(Date):
-    Times = Date.split("-")
+def ConvertDate(string):
+    Times = string.split("-")
     return int(Times[1])*30+(int)(Times[2])
 
 def ConvertPercent(number):

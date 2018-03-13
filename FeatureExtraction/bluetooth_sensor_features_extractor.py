@@ -42,4 +42,8 @@ def find_contactrate_perday(file):
 
 
 def extract(path):
+    
+    """
+    Method to extract the features based on the csv path given
+    """
     return find_contactrate_perday(path)
