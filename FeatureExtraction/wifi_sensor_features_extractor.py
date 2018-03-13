@@ -4,10 +4,8 @@ Description: Code to find campus arrival time, campus departure time, time spent
 around the city for each day using  the  known  MAC  addresses of University  and  geographic  coordinates  for  each  campus  WiFirouter.
 """
 #Importing the required libraries.
-
 import numpy as np
 import pandas as pd
-
 import FeatureExtraction.CommonFunctions.dataprocessing_helper as dataprocessor
 
 
@@ -19,8 +17,8 @@ def get_campus_entry_leave_times(file):
     method to find the campus entry time, leave time and time on campus
     First time in a day a phone sees a campus router is entry time of the participant/phone and
     last time is leave time. Difference of these two gives time spent on campus.
-    :param file:
-    :return:
+    :param file path:
+    :return dataframe:
     """
     #Read the data in to data frame
     df = pd.read_csv(file)
@@ -70,6 +68,9 @@ def get_diff_wifi_seen(file):
 
 
 def extract(path):
+    """
+    method to extrac campus entry time, leave time, time spent in campus and different buildings, wifi routers seen
+    """
 
     #extracting campus entry leave times, time in school and different wifi router seen in city
     df_campus_entry_leave_times=get_campus_entry_leave_times(path)
